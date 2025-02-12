@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ portfolio.name }} - Portfolio</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.10.3/cdn.min.js" defer></script>
+
+    <!-- Custom Styles -->
+    <style>
+        body {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            color: #fff;
+        }
+    </style>
+</head>
+<body class="font-sans">
+
+    <!-- Navbar -->
+    <nav class="bg-gray-900 shadow-lg py-4 fixed w-full top-0 z-10 animate__animated animate__fadeInDown">
+        <div class="container mx-auto flex justify-between items-center px-6">
+            <a href="#" class="text-xl font-bold text-white">{{ portfolio.name }}</a>
+            <div class="space-x-6">
+                <a href="#projects" class="text-gray-300 hover:text-white transition duration-300">Loyihalar</a>
+                <a href="#contact" class="text-gray-300 hover:text-white transition duration-300">Aloqa</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Portfolio Section -->
+    <section class="text-center py-24 animate__animated animate__fadeInUp">
+        <img src="{{ portfolio.profile_image.url }}" alt="Profile" class="w-36 h-36 rounded-full mx-auto shadow-lg hover:scale-110 transition-transform duration-300">
+        <h1 class="text-3xl font-bold mt-4">{{ portfolio.name }}</h1>
+        <p class="text-gray-400 mt-2">{{ portfolio.bio }}</p>
+    </section>
+
+    <!-- Skills -->
+    <section class="text-center py-8">
+        <h2 class="text-2xl font-bold">Ko‘nikmalar</h2>
+        <div class="flex flex-wrap justify-center mt-4 gap-3">
+            {% for skill in skills %}
+                <span class="bg-blue-500 text-white px-4 py-2 rounded-full shadow-md transform hover:scale-105 transition duration-300">{{ skill.name }}</span>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="container mx-auto px-6 py-12">
+        <h2 class="text-2xl font-bold text-center mb-6">Loyihalar</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+            {% for project in projects %}
+                <div class="bg-gray-800 p-6 rounded-lg shadow-lg hover:scale-105 transition-transform duration-300">
+                    <img src="{{ project.image.url }}" class="w-full h-48 object-cover rounded-lg hover:opacity-80 transition duration-300">
+                    <h3 class="text-xl font-bold mt-4">{{ project.title }}</h3>
+                    <p class="text-gray-400 mt-2">{{ project.description }}</p>
+                    <div class="flex flex-wrap gap-2 mt-3">
+                        {% for tech in project.get_technologies_list %}
+                            <span class="bg-gray-700 text-white px-3 py-1 text-sm rounded-full">{{ tech }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="mt-4">
+                        <a href="{{ project.github_link }}" class="text-blue-400 hover:text-blue-500 transition duration-300">GitHub</a>
+                        {% if project.live_demo %}
+                            <a href="{{ project.live_demo }}" class="ml-4 text-green-400 hover:text-green-500 transition duration-300">Live Demo</a>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="container mx-auto px-6 py-12">
+        <h2 class="text-2xl font-bold text-center mb-6">Aloqa</h2>
+        <form method="POST" action="{% url 'contact' %}" class="bg-gray-800 p-6 rounded-lg shadow-lg max-w-lg mx-auto">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label class="block text-gray-300">Ismingiz</label>
+                <input type="text" name="name" class="w-full px-4 py-2 rounded-lg bg-gray-700 border-none text-white focus:ring-2 focus:ring-blue-500" required>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-300">Email</label>
+                <input type="email" name="email" class="w-full px-4 py-2 rounded-lg bg-gray-700 border-none text-white focus:ring-2 focus:ring-blue-500" required>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-300">Xabar</label>
+                <textarea name="message" class="w-full px-4 py-2 rounded-lg bg-gray-700 border-none text-white focus:ring-2 focus:ring-blue-500" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-300">Yuborish</button>
+        </form>
+    </section>
+</body>
+</html>
