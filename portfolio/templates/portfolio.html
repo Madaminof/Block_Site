@@ -67,25 +67,25 @@
             </section>
 
             <!-- Aloqa Bo‘limi (Form) -->
-            <section id="contact" class="bg-gray-800 p-6 rounded-lg shadow-lg">
-                <h2 class="text-2xl font-bold mb-6">Aloqa</h2>
-                <form method="POST" action="{% url 'contact' %}">
-                    {% csrf_token %}
-                    <div class="mb-4">
-                        <label class="block text-gray-300">Ismingiz</label>
-                        <input type="text" name="name" class="w-full px-4 py-2 rounded-lg bg-gray-700 border-none text-white focus:ring-2 focus:ring-blue-500" required>
-                    </div>
-                    <div class="mb-4">
-                        <label class="block text-gray-300">Email</label>
-                        <input type="email" name="email" class="w-full px-4 py-2 rounded-lg bg-gray-700 border-none text-white focus:ring-2 focus:ring-blue-500" required>
-                    </div>
-                    <div class="mb-4">
-                        <label class="block text-gray-300">Xabar</label>
-                        <textarea name="message" class="w-full px-4 py-2 rounded-lg bg-gray-700 border-none text-white focus:ring-2 focus:ring-blue-500" rows="4" required></textarea>
-                    </div>
-                    <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-300">Yuborish</button>
-                </form>
-            </section>
+           <form method="POST" action="{% url 'contact' %}" class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                {% csrf_token %}
+                <div class="mb-4">
+                    <label class="block text-gray-300">Ismingiz</label>
+                    <input type="text" name="name" class="w-full px-4 py-2 rounded-lg bg-gray-700 text-white" required>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-300">Email</label>
+                    <input type="email" name="email" class="w-full px-4 py-2 rounded-lg bg-gray-700 text-white" required>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-300">Xabar</label>
+                    <textarea name="message" class="w-full px-4 py-2 rounded-lg bg-gray-700 text-white" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition">
+                    Yuborish
+                </button>
+            </form>
+
 
         </div>
 

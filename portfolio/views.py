@@ -16,25 +16,26 @@ def portfolio_view(request):
     return render(request, 'portfolio.html', context)
 
 
+
 def contact_view(request):
     if request.method == "POST":
-        name = request.POST.get('name')
-        email = request.POST.get('email')
-        message = request.POST.get('message')
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        message = request.POST.get("message")
 
-        # Xabarni bazaga saqlash
+        # Ma'lumotni bazaga saqlash
         ContactMessage.objects.create(name=name, email=email, message=message)
 
         # Email jo‘natish
         send_mail(
-            subject=f"Portfolio orqali yangi xabar - {name}",
+            subject=f"Yangi xabar - {name}",
             message=f"Ism: {name}\nEmail: {email}\n\nXabar:\n{message}",
-            from_email='your-email@example.com',  # O'zingizning emailingiz
-            recipient_list=['your-email@example.com'],  # Xabar tushishi kerak bo'lgan email
+            from_email="bbackend25@gmail.com",
+            recipient_list=["bbackend25@gmail.com"],  # O'zingizning emailingiz
             fail_silently=False,
         )
 
-        messages.success(request, "Xabaringiz yuborildi!")
-        return redirect('portfolio')
+        messages.success(request, "Xabaringiz muvaffaqiyatli yuborildi!")
+        return redirect("portfolio")  # O'zingizning URL nomingiz
 
-    return redirect('portfolio')
+    return redirect("portfolio")
