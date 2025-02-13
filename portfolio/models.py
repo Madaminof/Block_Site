@@ -4,6 +4,10 @@ class Portfolio(models.Model):
     name = models.CharField(max_length=255)
     bio = models.TextField()
     profile_image = models.ImageField(upload_to='profile_images/')
+    phone = models.CharField(max_length=20, blank=True, null=True)
+    telegram = models.URLField(blank=True, null=True)
+    linkedin = models.URLField(blank=True, null=True)
+    leetcode = models.URLField(blank=True, null=True)
 
     def __str__(self):
         return self.name
